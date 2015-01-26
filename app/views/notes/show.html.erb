@@ -1,4 +1,32 @@
-<p>
-    <strong>Text:</strong>
-    <%= @note.text %>
-</p>
+<div id="warning-message">
+    <p>Clicking on the button below will show you the note. This URL will stop existing!</p>
+
+    <button id="showText">
+        Show me! 
+    </button>
+</div>
+
+<div id="actual-message" style="display:none">
+    <p><strong>Text:</strong></p>
+    <div id="message">
+
+    </div>
+    <label for="new-url">New URL:</label>
+    <input id="new-url" type="text" disabled="disabled">
+</div>
+
+<script>
+    $('#showText').click(function() {
+        $.ajax({
+            url: window.location,
+            type: "DELETE",
+            success: function(result) {
+                $("#warning-message").hide().remove();
+                var $actualMessage = $("#actual-message");
+                $actualMessage.children("#message").text(result.text);
+                $actualMessage.children("input").val(window.location.origin + window.location.pathname.split("/").slice(0,-1).join("/") + "/" + result.new_uid);
+                $actualMessage.show();
+            }
+        });
+    });
+</script>
