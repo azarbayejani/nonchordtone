@@ -1,32 +1,32 @@
-<div id="warning-message">
-    <p>Clicking on the button below will show you the note. This URL will stop existing!</p>
+<div id="warning-message" class="row">
+  <div class="col-sm-offset-3 col-sm-6">
+    <div class="row">
+      <p>Clicking on the button below will show you the note. This URL will stop existing!</p>
 
-    <button id="showText">
+      <button id="showText" class="btn btn-danger">
         Show me! 
-    </button>
+      </button>
+    </div>
+
+    <hr>
+    
+    <div class="row">
+      <p><strong>Share link:</strong></p>
+      <input type="text" class="form-control" disabled="disabled" value="<%= request.original_url %>">
+    </div>
+  </div>
 </div>
 
-<div id="actual-message" style="display:none">
+<div id="actual-message" class="row hidden">
+  <div class="col-sm-offset-3 col-sm-6">
     <p><strong>Text:</strong></p>
     <div id="message">
 
     </div>
-    <label for="new-url">New URL:</label>
-    <input id="new-url" type="text" disabled="disabled">
-</div>
 
-<script>
-    $('#showText').click(function() {
-        $.ajax({
-            url: window.location,
-            type: "DELETE",
-            success: function(result) {
-                $("#warning-message").hide().remove();
-                var $actualMessage = $("#actual-message");
-                $actualMessage.children("#message").text(result.text);
-                $actualMessage.children("input").val(window.location.origin + window.location.pathname.split("/").slice(0,-1).join("/") + "/" + result.new_uid);
-                $actualMessage.show();
-            }
-        });
-    });
-</script>
+    <hr>
+   
+    <label for="new-url">New URL:</label>
+    <input id="new-url" class="form-control" type="text" disabled="disabled">
+  </div>
+</div>
