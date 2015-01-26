@@ -13,6 +13,9 @@
 
 ActiveRecord::Schema.define(version: 20150126003539) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "notes", force: :cascade do |t|
     t.text     "text"
     t.datetime "created_at", null: false
@@ -20,6 +23,6 @@ ActiveRecord::Schema.define(version: 20150126003539) do
     t.string   "uid"
   end
 
-  add_index "notes", ["uid"], name: "index_notes_on_uid"
+  add_index "notes", ["uid"], name: "index_notes_on_uid", using: :btree
 
 end
